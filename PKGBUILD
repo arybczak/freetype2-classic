@@ -10,7 +10,7 @@
 # Contributor: freedom
 
 pkgname=freetype2-classic
-pkgver=2.9.1
+pkgver=2.10.0
 pkgrel=1
 pkgdesc="Font rasterization library with classic (v35) interpreter, subpixel rendering and modified filter coefficients (Gibson)"
 arch=(x86_64)
@@ -29,13 +29,13 @@ source=(https://download-mirror.savannah.gnu.org/releases/freetype/freetype-${pk
         1001-Low-pass-filter-gibson-coeffs.patch
         1002-Enable-subpixel-rendering.patch
 )
-sha1sums=('220c82062171c513e4017c523d196933c9de4a7d'
+sha1sums=('f6abf03e0e3189a0de883981c57d3861b5d314f5'
           'SKIP'
-          'd9eb22e5c962923089b0c9fc5491cf28a19bd982'
-          'fc49742fb6c19fe0677e3552bb7c00aac8530265'
+          '46fd67e6a594f6c2c473b9321ba64913984ba42f'
+          'af76172be8135e74391b7ad1b82c2124ae0ad86c'
           '59331e00ecf12504b5258f6dd04e29ac8a9874b0'
           '90c401227f50ae75ed4b3db411d3a27814dcd5bf'
-          '60f26c740ac53c684703ef401a481659a7364ff4')
+          '769ee34c98e78d1e6182476704ddec85f92da394')
 validpgpkeys=('58E0C111E39F5408C5D3EC76C1A60EACE707FDA5')
 
 prepare() {
