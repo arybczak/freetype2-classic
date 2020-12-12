@@ -10,7 +10,7 @@
 # Contributor: freedom
 
 pkgname=freetype2-classic
-pkgver=2.10.0
+pkgver=2.10.2
 pkgrel=1
 pkgdesc="Font rasterization library with classic (v35) interpreter, subpixel rendering and modified filter coefficients (Gibson)"
 arch=(x86_64)
@@ -22,14 +22,14 @@ depends=('zlib' 'bzip2' 'sh' 'libpng' 'harfbuzz')
 makedepends=('libx11')
 conflicts=('freetype2')
 provides=('freetype2' 'libfreetype.so')
-source=(https://download-mirror.savannah.gnu.org/releases/freetype/freetype-${pkgver}.tar.bz2{,.sig}
+source=(https://download-mirror.savannah.gnu.org/releases/freetype/freetype-${pkgver}.tar.xz{,.sig}
         0001-Enable-table-validation-modules.patch
         0003-Enable-long-PCF-family-names.patch
         1000-Disable-subpixel-hinting.patch
         1001-Low-pass-filter-gibson-coeffs.patch
         1002-Enable-subpixel-rendering.patch
 )
-sha1sums=('f6abf03e0e3189a0de883981c57d3861b5d314f5'
+sha1sums=('b074d5c34dc0e3cc150be6e7aa6b07c9ec4ed875'
           'SKIP'
           '46fd67e6a594f6c2c473b9321ba64913984ba42f'
           'af76172be8135e74391b7ad1b82c2124ae0ad86c'
