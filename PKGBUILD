@@ -10,7 +10,7 @@
 # Contributor: freedom
 
 pkgname=freetype2-classic
-pkgver=2.10.2
+pkgver=2.11.1
 pkgrel=1
 pkgdesc="Font rasterization library with classic (v35) interpreter, subpixel rendering and modified filter coefficients (Gibson)"
 arch=(x86_64)
@@ -26,17 +26,21 @@ source=(https://download-mirror.savannah.gnu.org/releases/freetype/freetype-${pk
         0001-Enable-table-validation-modules.patch
         0003-Enable-long-PCF-family-names.patch
         1000-Disable-subpixel-hinting.patch
+        1000-Enable-subpixel-hinting.patch
         1001-Low-pass-filter-gibson-coeffs.patch
         1002-Enable-subpixel-rendering.patch
+        freetype2.sh
 )
-sha1sums=('b074d5c34dc0e3cc150be6e7aa6b07c9ec4ed875'
-          'SKIP'
-          '46fd67e6a594f6c2c473b9321ba64913984ba42f'
-          'af76172be8135e74391b7ad1b82c2124ae0ad86c'
-          '59331e00ecf12504b5258f6dd04e29ac8a9874b0'
-          '90c401227f50ae75ed4b3db411d3a27814dcd5bf'
-          '769ee34c98e78d1e6182476704ddec85f92da394')
-validpgpkeys=('58E0C111E39F5408C5D3EC76C1A60EACE707FDA5')
+sha256sums=('3333ae7cfda88429c97a7ae63b7d01ab398076c3b67182e960e5684050f2c5c8'
+            'SKIP'
+            '739a67083b810c04e5cb87fa7e5a7819983410307e3d38d8f2a334c23085a5c2'
+            '778a084b84215fbe62dafaed1dd7ebcdbd35c5c7af681d2789b5fe37764ceadd'
+            '8e0fc429ad153fff05604735d254542ffc6070704ba07fff31122a19db3947c8'
+            '0607ac8176d4f08bcfb78d07bdc2c66fcbe7dfde6c82a0e98d6e625597442fd0'
+            '162895e2ba5dd17b6583110eb83b858e378411f3c2d2c8fda571f473af69f9ca'
+            '6d059feaeb519aa29086a7c967ff0d31648c8c2adcbbe2fdfa8d9a50152b89cb'
+            'f7f8e09c44f7552c883846e9a6a1efc50377c4932234e74adc4a8ff750606467')
+validpgpkeys=('58E0C111E39F5408C5D3EC76C1A60EACE707FDA5') # Werner Lemberg <wl@gnu.org>
 
 prepare() {
   cd freetype-${pkgver}
@@ -45,7 +49,8 @@ prepare() {
   patch -Np1 -i ../0003-Enable-long-PCF-family-names.patch
 
   # PKGBUILD specific
-  patch -Np1 -i ../1000-Disable-subpixel-hinting.patch
+  #patch -Np1 -i ../1000-Disable-subpixel-hinting.patch
+  patch -Np1 -i ../1000-Enable-subpixel-hinting.patch
   patch -Np1 -i ../1001-Low-pass-filter-gibson-coeffs.patch
   patch -Np1 -i ../1002-Enable-subpixel-rendering.patch
 }
@@ -62,6 +67,13 @@ check() {
 }
 
 package() {
+  install=freetype2.install
+  backup=(etc/profile.d/freetype2.sh)
+
   cd freetype-${pkgver}
   make DESTDIR="${pkgdir}" install
+  cd ..
+  install -Dt "$pkgdir/etc/profile.d" -m644 freetype2.sh
+  install -Dt "$pkgdir/usr/share/aclocal" -m644 \
+    freetype-$pkgver/builds/unix/freetype2.m4
 }
